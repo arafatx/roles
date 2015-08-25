@@ -342,7 +342,7 @@ Now you can easily protect your routes.
 ```php
 $router->get('/example', [
     'as' => 'example',
-    'middleware' => 'role:admin',
+    'middleware' => 'role:admin', //'middleware' => 'role:admin|manager|customer', //multiple roles check
     'uses' => 'ExampleController@index',
 ]);
 
