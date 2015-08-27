@@ -106,14 +106,22 @@ trait HasRoleAndPermission
     }
 
     /**
-     * Attach role to a user.
+     * Check the existing role and attach role to a user.
      *
      * @param int|\Bican\Roles\Models\Role $role
      * @return null|bool
      */
     public function attachRole($role)
     {
-        return (!$this->getRoles()->contains($role)) ? $this->roles()->attach($role) : true;
+        /* If existing role if not found */
+        if (!$this->hasRole($role->slug)) 
+        {
+            /* Attach role */
+            $this->roles()->attach($role);
+            return true;
+        }
+        
+        return false;
     }
 
     /**
